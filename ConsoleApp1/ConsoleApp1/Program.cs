@@ -1,0 +1,269 @@
+﻿using ConsoleApp1;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+
+        bool continueRunning = true;
+
+        while (continueRunning)
+        {
+            Console.WriteLine("\nвыберите задание");
+            Console.WriteLine("1. Задание 1");
+            Console.WriteLine("2. Задание 2");
+            Console.WriteLine("3. Задание 3");
+            Console.WriteLine("4. Задание 4");
+            Console.WriteLine("5. Задание 5");
+            Console.WriteLine("0. Выход из программы");
+
+            int choice = ConsoleValidator.ReadValidatedInt("", 0, 5);
+
+            switch (choice)
+            {
+                case 1:
+                    DemonstrateTask1();
+                    break;
+                case 2:
+                    DemonstrateTask2();
+                    break;
+                case 3:
+                    DemonstrateTask3();
+                    break;
+                case 4:
+                    DemonstrateTask4();
+                    break;
+                case 5:
+                    DemonstrateTask5();
+                    break;
+                case 0:
+                    continueRunning = false;
+                    break;
+            }
+
+            if (continueRunning && choice != 0)
+            {
+                Console.WriteLine("\nНажмите любую клавишу для продолжения...");
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+    }
+
+    static void DemonstrateTask1()
+    {
+        // 1.1
+        Console.WriteLine("\n1.1 Точка координат");
+        Console.WriteLine("Создание трех точек с разными координатами:");
+
+        double x1 = ConsoleValidator.ReadValidatedDouble("Введите координату X для точки 1: ", -1000, 1000, true);
+        double y1 = ConsoleValidator.ReadValidatedDouble("Введите координату Y для точки 1: ", -1000, 1000, true);
+        var point1 = new Point(x1, y1);
+
+        double x2 = ConsoleValidator.ReadValidatedDouble("Введите координату X для точки 2: ", -1000, 1000, true);
+        double y2 = ConsoleValidator.ReadValidatedDouble("Введите координату Y для точки 2: ", -1000, 1000, true);
+        var point2 = new Point(x2, y2);
+
+        double x3 = ConsoleValidator.ReadValidatedDouble("Введите координату X для точки 3: ", -1000, 1000, true);
+        double y3 = ConsoleValidator.ReadValidatedDouble("Введите координату Y для точки 3: ", -1000, 1000, true);
+        var point3 = new Point(x3, y3);
+
+        Console.WriteLine($"\nСозданные точки:");
+        Console.WriteLine($"Точка 1: {point1}");
+        Console.WriteLine($"Точка 2: {point2}");
+        Console.WriteLine($"Точка 3: {point3}");
+    }
+
+    static void DemonstrateTask2()
+    {
+        // 2.1
+        Console.WriteLine("\n2.1 Прямая");
+        Console.WriteLine("Создание линии 1:");
+        double line1x1 = ConsoleValidator.ReadValidatedDouble("Начало линии 1 - X: ", -1000, 1000, true);
+        double line1y1 = ConsoleValidator.ReadValidatedDouble("Начало линии 1 - Y: ", -1000, 1000, true);
+        double line1x2 = ConsoleValidator.ReadValidatedDouble("Конец линии 1 - X: ", -1000, 1000, true);
+        double line1y2 = ConsoleValidator.ReadValidatedDouble("Конец линии 1 - Y: ", -1000, 1000, true);
+
+        Console.WriteLine("Создание линии 2 (горизонтальная):");
+        double line2y = ConsoleValidator.ReadValidatedDouble("Высота линии 2 (Y): ", -1000, 1000, true);
+        double line2x1 = ConsoleValidator.ReadValidatedDouble("Начало линии 2 - X: ", -1000, 1000, true);
+        double line2x2 = ConsoleValidator.ReadValidatedDouble("Конец линии 2 - X: ", -1000, 1000, true);
+
+        var line1 = new Line(new Point(line1x1, line1y1), new Point(line1x2, line1y2));
+        var line2 = new Line(new Point(line2x1, line2y), new Point(line2x2, line2y));
+        var line3 = new Line(line1.Start, line2.End);
+
+        Console.WriteLine($"\nСозданные линии:");
+        Console.WriteLine($"Линия 1: {line1}");
+        Console.WriteLine($"Линия 2: {line2}");
+        Console.WriteLine($"Линия 3: {line3}");
+
+        // Демонстрация изменения координат
+        Console.WriteLine("\nИзменение координат");
+        bool changeLines = ConsoleValidator.ReadValidatedBoolean("Хотите изменить координаты линий 1 и 2?: ");
+
+        if (changeLines)
+        {
+            double newLine1x1 = ConsoleValidator.ReadValidatedDouble("начало линии 1 - X: ", -1000, 1000, true);
+            double newLine1y1 = ConsoleValidator.ReadValidatedDouble("начало линии 1 - Y: ", -1000, 1000, true);
+            line1.Start = new Point(newLine1x1, newLine1y1);
+
+            double newLine2x2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - X: ", -1000, 1000, true);
+            double newLine2y2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - Y: ", -1000, 1000, true);
+            line2.End = new Point(newLine2x2, newLine2y2);
+
+            // Обновляем линию 3
+            line3 = new Line(line1.Start, line2.End);
+
+            Console.WriteLine($"\nПосле изменения:");
+            Console.WriteLine($"Линия 1: {line1}");
+            Console.WriteLine($"Линия 2: {line2}");
+            Console.WriteLine($"Линия 3: {line3}");
+        }
+    }
+
+    static void DemonstrateTask3()
+    {
+        // 3.1
+        Console.WriteLine("\n3.1 Студент");
+        string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
+
+        Console.WriteLine("Введите оценки студента (через пробел, от 1 до 5):");
+        int[] grades = ReadGradesFromConsole();
+
+        var student1 = new Student(studentName, grades);
+
+        // копирование
+        var student2 = new Student("Копия " + studentName, (int[])grades.Clone());
+        if (grades.Length > 0)
+        {
+            student2.Grades[0] = 5; // изменение первой оценки у копии
+        }
+
+        // создание независимой копии
+        var student3 = new Student("Независимая копия " + studentName, grades.ToArray());
+
+        Console.WriteLine($"\nСозданные студенты:");
+        Console.WriteLine($"Студент 1 (оригинал): {student1}");
+        Console.WriteLine($"Студент 2 (копия с изменением): {student2}");
+        Console.WriteLine($"Студент 3 (независимая копия): {student3}");
+
+        Console.WriteLine("\nОбъяснение: При изменении оценок у копии, оригинал не меняется, потому что мы создали новый массив.");
+
+    }
+
+    static void DemonstrateTask4()
+    {
+        // 4.1 точка
+        Console.WriteLine("\n4.1");
+
+        // Точка с координатами 3;5
+        Console.WriteLine("\nТочка 1 (3;5):");
+        var point1 = new Point(3, 5);
+        Console.WriteLine($"Создана: {point1}");
+
+        // Точка с координатами 25;6
+        Console.WriteLine("\nТочка 2 (25;6):");
+        var point2 = new Point(25, 6);
+        Console.WriteLine($"Создана: {point2}");
+
+        // Точка с координатами 7;8
+        Console.WriteLine("\nТочка 3 (7;8):");
+        var point3 = new Point(7, 8);
+        Console.WriteLine($"Создана: {point3}");
+
+        var customPoint = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 1: ");
+        Console.WriteLine($"Создана точка: {customPoint}");
+
+
+        // 4.7 создание студента
+        Console.WriteLine("\n4.7");
+        Console.WriteLine("Создание студента Васи с оценками 3,4,5:");
+        var student1 = new Student("Вася", new int[] { 3, 4, 5 });
+
+        Console.WriteLine("Создание студента Максима без оценок:");
+        var student2 = new Student("Максим");
+
+        Console.WriteLine($"\nСозданные студенты:");
+        Console.WriteLine(student1);
+        Console.WriteLine(student2);
+
+    }
+
+    static void DemonstrateTask5()
+    {
+        // 5.6 Студент отличник
+        Console.WriteLine("\n5.6");
+
+        Console.WriteLine("Создание студента Васи с оценками 3,4,5,4:");
+        var student1 = new StudentWithStats("Вася", new int[] { 3, 4, 5, 4 });
+
+        Console.WriteLine("Создание студента Пети с оценками 5,5,5,5:");
+        var student2 = new StudentWithStats("Петя", new int[] { 5, 5, 5, 5 });
+
+        Console.WriteLine($"\nРезультаты студентов:");
+        Console.WriteLine(student1);
+        Console.WriteLine(student2);
+
+        // Дополнительная информация
+        Console.WriteLine($"\nАнализ успеваемости:");
+        Console.WriteLine($"{student1.Name}: Средний балл = {student1.AverageGrade:F2}, Отличник = {student1.IsExcellent}");
+        Console.WriteLine($"{student2.Name}: Средний балл = {student2.AverageGrade:F2}, Отличник = {student2.IsExcellent}");
+
+        if (student1.IsExcellent && student2.IsExcellent)
+            Console.WriteLine("Оба студента - отличники!");
+        else if (student1.IsExcellent)
+            Console.WriteLine($"{student1.Name} - отличник!");
+        else if (student2.IsExcellent)
+            Console.WriteLine($"{student2.Name} - отличник!");
+        else
+            Console.WriteLine("Среди студентов нет отличников.");
+    }
+
+    // Вспомогательный метод для чтения оценок
+    static int[] ReadGradesFromConsole()
+    {
+        while (true)
+        {
+            try
+            {
+                Console.Write("Введите оценки через пробел (1-5): ");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return new int[0];
+                }
+
+                string[] parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var grades = new List<int>();
+
+                foreach (string part in parts)
+                {
+                    if (int.TryParse(part, out int grade) && grade >= 1 && grade <= 5)
+                    {
+                        grades.Add(grade);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Ошибка: '{part}' не является допустимой оценкой (1-5). Попробуйте снова.");
+                        throw new FormatException();
+                    }
+                }
+
+                return grades.ToArray();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Пожалуйста, введите только числа от 1 до 5, разделенные пробелами.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Произошла ошибка: {ex.Message}. Попробуйте снова.");
+            }
+        }
+    }
+}

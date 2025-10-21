@@ -25,19 +25,19 @@ class Program
             switch (choice)
             {
                 case 1:
-                    DemonstrateTask1();
+                    Task1();
                     break;
                 case 2:
-                    DemonstrateTask2();
+                    Task2();
                     break;
                 case 3:
-                    DemonstrateTask3();
+                    Task3();
                     break;
                 case 4:
-                    DemonstrateTask4();
+                    Task4();
                     break;
                 case 5:
-                    DemonstrateTask5();
+                    Task5();
                     break;
                 case 0:
                     continueRunning = false;
@@ -53,11 +53,10 @@ class Program
         }
     }
 
-    static void DemonstrateTask1()
+    static void Task1()
     {
         // 1.1
-        Console.WriteLine("\n1.1 Точка координат");
-        Console.WriteLine("Создание трех точек с разными координатами:");
+        Console.WriteLine("\n1.1");
 
         double x1 = ConsoleValidator.ReadValidatedDouble("Введите координату X для точки 1: ", -1000, 1000, true);
         double y1 = ConsoleValidator.ReadValidatedDouble("Введите координату Y для точки 1: ", -1000, 1000, true);
@@ -71,24 +70,23 @@ class Program
         double y3 = ConsoleValidator.ReadValidatedDouble("Введите координату Y для точки 3: ", -1000, 1000, true);
         var point3 = new Point(x3, y3);
 
-        Console.WriteLine($"\nСозданные точки:");
         Console.WriteLine($"Точка 1: {point1}");
         Console.WriteLine($"Точка 2: {point2}");
         Console.WriteLine($"Точка 3: {point3}");
     }
 
-    static void DemonstrateTask2()
+    static void Task2()
     {
         // 2.1
-        Console.WriteLine("\n2.1 Прямая");
-        Console.WriteLine("Создание линии 1:");
+        Console.WriteLine("\n2.1");
+        Console.WriteLine("Линия 1:");
         double line1x1 = ConsoleValidator.ReadValidatedDouble("Начало линии 1 - X: ", -1000, 1000, true);
         double line1y1 = ConsoleValidator.ReadValidatedDouble("Начало линии 1 - Y: ", -1000, 1000, true);
         double line1x2 = ConsoleValidator.ReadValidatedDouble("Конец линии 1 - X: ", -1000, 1000, true);
         double line1y2 = ConsoleValidator.ReadValidatedDouble("Конец линии 1 - Y: ", -1000, 1000, true);
 
-        Console.WriteLine("Создание линии 2 (горизонтальная):");
-        double line2y = ConsoleValidator.ReadValidatedDouble("Высота линии 2 (Y): ", -1000, 1000, true);
+        Console.WriteLine("Линия 2:");
+        double line2y = ConsoleValidator.ReadValidatedDouble("Высота линии 2: ", -1000, 1000, true);
         double line2x1 = ConsoleValidator.ReadValidatedDouble("Начало линии 2 - X: ", -1000, 1000, true);
         double line2x2 = ConsoleValidator.ReadValidatedDouble("Конец линии 2 - X: ", -1000, 1000, true);
 
@@ -96,12 +94,10 @@ class Program
         var line2 = new Line(new Point(line2x1, line2y), new Point(line2x2, line2y));
         var line3 = new Line(line1.Start, line2.End);
 
-        Console.WriteLine($"\nСозданные линии:");
         Console.WriteLine($"Линия 1: {line1}");
         Console.WriteLine($"Линия 2: {line2}");
         Console.WriteLine($"Линия 3: {line3}");
 
-        // Демонстрация изменения координат
         Console.WriteLine("\nИзменение координат");
         bool changeLines = ConsoleValidator.ReadValidatedBoolean("Хотите изменить координаты линий 1 и 2?: ");
 
@@ -114,116 +110,113 @@ class Program
             double newLine2x2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - X: ", -1000, 1000, true);
             double newLine2y2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - Y: ", -1000, 1000, true);
             line2.End = new Point(newLine2x2, newLine2y2);
-
-            // Обновляем линию 3
+            
             line3 = new Line(line1.Start, line2.End);
 
-            Console.WriteLine($"\nПосле изменения:");
             Console.WriteLine($"Линия 1: {line1}");
             Console.WriteLine($"Линия 2: {line2}");
             Console.WriteLine($"Линия 3: {line3}");
         }
     }
 
-    static void DemonstrateTask3()
+    static void Task3()
     {
         // 3.1
-        Console.WriteLine("\n3.1 Студент");
+        Console.WriteLine("\n3.1");
         string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
 
-        Console.WriteLine("Введите оценки студента (через пробел, от 1 до 5):");
         int[] grades = ReadGradesFromConsole();
 
         var student1 = new Student(studentName, grades);
 
+        string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
+
         // копирование
-        var student2 = new Student("Копия " + studentName, (int[])grades.Clone());
+        var student2 = new Student(studentName2, (int[])grades.Clone());
         if (grades.Length > 0)
         {
             student2.Grades[0] = 5; // изменение первой оценки у копии
         }
 
-        // создание независимой копии
-        var student3 = new Student("Независимая копия " + studentName, grades.ToArray());
+        string studentName3 = ConsoleValidator.ReadValidatedString("Введите имя 3-го студента: ", 1, 50);
 
-        Console.WriteLine($"\nСозданные студенты:");
-        Console.WriteLine($"Студент 1 (оригинал): {student1}");
-        Console.WriteLine($"Студент 2 (копия с изменением): {student2}");
-        Console.WriteLine($"Студент 3 (независимая копия): {student3}");
+        var student3 = new Student(studentName3, grades.ToArray());
 
-        Console.WriteLine("\nОбъяснение: При изменении оценок у копии, оригинал не меняется, потому что мы создали новый массив.");
+        Console.WriteLine($"{student1}");
+        Console.WriteLine($"{student2}");
+        Console.WriteLine($"{student3}");
+
 
     }
 
-    static void DemonstrateTask4()
+    static void Task4()
     {
         // 4.1 точка
         Console.WriteLine("\n4.1");
 
-        // Точка с координатами 3;5
-        Console.WriteLine("\nТочка 1 (3;5):");
-        var point1 = new Point(3, 5);
-        Console.WriteLine($"Создана: {point1}");
+        //var point1 = new Point(3, 5);
+        //Console.WriteLine($"{point1}");
 
-        // Точка с координатами 25;6
-        Console.WriteLine("\nТочка 2 (25;6):");
-        var point2 = new Point(25, 6);
-        Console.WriteLine($"Создана: {point2}");
+        //var point2 = new Point(25, 6);
+        //Console.WriteLine($"{point2}");
 
-        // Точка с координатами 7;8
-        Console.WriteLine("\nТочка 3 (7;8):");
-        var point3 = new Point(7, 8);
-        Console.WriteLine($"Создана: {point3}");
+        //var point3 = new Point(7, 8);
+        //Console.WriteLine($"{point3}");
 
-        var customPoint = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 1: ");
-        Console.WriteLine($"Создана точка: {customPoint}");
+        var point1 = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 1: ");
+        Console.WriteLine($"{point1}");
+
+        var point2 = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 2: ");
+        Console.WriteLine($"{point2}");
+
+        var point3 = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 3: ");
+        Console.WriteLine($"{point3}");
 
 
         // 4.7 создание студента
         Console.WriteLine("\n4.7");
-        Console.WriteLine("Создание студента Васи с оценками 3,4,5:");
-        var student1 = new Student("Вася", new int[] { 3, 4, 5 });
 
-        Console.WriteLine("Создание студента Максима без оценок:");
-        var student2 = new Student("Максим");
+        string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
+        int[] grades = ReadGradesFromConsole();
+        var student1 = new Student(studentName, grades);
 
-        Console.WriteLine($"\nСозданные студенты:");
+
+        string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
+        var student2 = new Student(studentName2);
+
         Console.WriteLine(student1);
         Console.WriteLine(student2);
 
     }
 
-    static void DemonstrateTask5()
+    static void Task5()
     {
         // 5.6 Студент отличник
         Console.WriteLine("\n5.6");
 
-        Console.WriteLine("Создание студента Васи с оценками 3,4,5,4:");
-        var student1 = new StudentWithStats("Вася", new int[] { 3, 4, 5, 4 });
+        string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
+        int[] grades = ReadGradesFromConsole();
+        var student1 = new StudentWithStats(studentName, grades);
 
-        Console.WriteLine("Создание студента Пети с оценками 5,5,5,5:");
-        var student2 = new StudentWithStats("Петя", new int[] { 5, 5, 5, 5 });
 
-        Console.WriteLine($"\nРезультаты студентов:");
-        Console.WriteLine(student1);
-        Console.WriteLine(student2);
+        string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
+        int[] grades2 = ReadGradesFromConsole();
+        var student2 = new StudentWithStats(studentName2,grades2);
 
-        // Дополнительная информация
-        Console.WriteLine($"\nАнализ успеваемости:");
-        Console.WriteLine($"{student1.Name}: Средний балл = {student1.AverageGrade:F2}, Отличник = {student1.IsExcellent}");
-        Console.WriteLine($"{student2.Name}: Средний балл = {student2.AverageGrade:F2}, Отличник = {student2.IsExcellent}");
+        Console.WriteLine($"{student1.Name}: Средний балл = {student1.AverageGrade:F2}, " + (student1.IsExcellent ? "отличник" : "не отличник") );
+        Console.WriteLine($"{student2.Name}: Средний балл = {student2.AverageGrade:F2}, " + (student2.IsExcellent ? "отличник" : "не отличник"));
 
-        if (student1.IsExcellent && student2.IsExcellent)
-            Console.WriteLine("Оба студента - отличники!");
-        else if (student1.IsExcellent)
-            Console.WriteLine($"{student1.Name} - отличник!");
-        else if (student2.IsExcellent)
-            Console.WriteLine($"{student2.Name} - отличник!");
-        else
-            Console.WriteLine("Среди студентов нет отличников.");
+        //if (student1.IsExcellent && student2.IsExcellent)
+        //    Console.WriteLine("оба студента - отличники");
+        //else if (student1.IsExcellent)
+        //    Console.WriteLine($"{student1.Name} - отличник");
+        //else if (student2.IsExcellent)
+        //    Console.WriteLine($"{student2.Name} - отличник");
+        //else
+        //    Console.WriteLine("нет отличников");
     }
 
-    // Вспомогательный метод для чтения оценок
+    // метод для чтения оценок
     static int[] ReadGradesFromConsole()
     {
         while (true)

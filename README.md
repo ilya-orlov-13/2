@@ -62,6 +62,8 @@
 1. Создать класс `Student` со свойствами `Name` (string) и `Grades` (int[])
 2. Реализовать конструкторы для разных способов создания студента
 
+<img width="492" height="169" alt="image" src="https://github.com/user-attachments/assets/980baced-65c0-46ae-bc12-fd61cf1c7828" />
+
 
 
 ### Задание 4.1 - Создаем Точку
@@ -78,6 +80,8 @@
 2. Оставить единственный конструктор, требующий обе координаты
 3. Реализовать ввод точек через консоль в формате "X;Y"
 
+<img width="404" height="146" alt="image" src="https://github.com/user-attachments/assets/e9a2cd7d-5d9c-4590-abaa-ca5d7d436f52" />
+
 
 
 ### Задание 4.7 - Создаем Студента
@@ -93,6 +97,8 @@
 **Алгоритм**
 1. Модифицировать класс `Student`, добавив конструктор с параметрами по умолчанию
 2. Использовать необязательные параметры или перегрузку конструкторов
+
+<img width="837" height="196" alt="image" src="https://github.com/user-attachments/assets/2fc4eb95-1f77-41cb-941d-2ca50091d7f0" />
 
 
 
@@ -114,3 +120,5 @@
 1. Создать класс `StudentWithStats`, наследующий от `Student`
 2. Добавить свойства `AverageGrade` (double) и `IsExcellent` (bool)
 3. Реализовать вычисление среднего балла и проверку на отличника
+
+<img width="517" height="141" alt="image" src="https://github.com/user-attachments/assets/709078ff-2128-4cec-bbf6-fa8dcea69c21" />

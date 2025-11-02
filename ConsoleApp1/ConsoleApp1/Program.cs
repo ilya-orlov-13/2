@@ -1,13 +1,11 @@
 ﻿using ConsoleApp1;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 class Program
 {
     static void Main()
     {
-
         bool continueRunning = true;
 
         while (continueRunning)
@@ -55,7 +53,6 @@ class Program
 
     static void Task1()
     {
-        // 1.1
         Console.WriteLine("\n1.1");
 
         double x1 = ConsoleValidator.ReadValidatedDouble("Введите координату X для точки 1: ", -1000, 1000, true);
@@ -77,7 +74,6 @@ class Program
 
     static void Task2()
     {
-        // 2.1
         Console.WriteLine("\n2.1");
         Console.WriteLine("Линия 1:");
         double line1x1 = ConsoleValidator.ReadValidatedDouble("Начало линии 1 - X: ", -1000, 1000, true);
@@ -110,7 +106,7 @@ class Program
             double newLine2x2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - X: ", -1000, 1000, true);
             double newLine2y2 = ConsoleValidator.ReadValidatedDouble("конец линии 2 - Y: ", -1000, 1000, true);
             line2.End = new Point(newLine2x2, newLine2y2);
-            
+
             line3 = new Line(line1.Start, line2.End);
 
             Console.WriteLine($"Линия 1: {line1}");
@@ -121,7 +117,6 @@ class Program
 
     static void Task3()
     {
-        // 3.1
         Console.WriteLine("\n3.1");
         string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
 
@@ -131,11 +126,10 @@ class Program
 
         string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
 
-        // копирование
         var student2 = new Student(studentName2, (int[])grades.Clone());
         if (grades.Length > 0)
         {
-            student2.Grades[0] = 5; // изменение первой оценки у копии
+            student2.Grades[0] = 5;
         }
 
         string studentName3 = ConsoleValidator.ReadValidatedString("Введите имя 3-го студента: ", 1, 50);
@@ -145,23 +139,11 @@ class Program
         Console.WriteLine($"{student1}");
         Console.WriteLine($"{student2}");
         Console.WriteLine($"{student3}");
-
-
     }
 
     static void Task4()
     {
-        // 4.1 точка
         Console.WriteLine("\n4.1");
-
-        //var point1 = new Point(3, 5);
-        //Console.WriteLine($"{point1}");
-
-        //var point2 = new Point(25, 6);
-        //Console.WriteLine($"{point2}");
-
-        //var point3 = new Point(7, 8);
-        //Console.WriteLine($"{point3}");
 
         var point1 = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 1: ");
         Console.WriteLine($"{point1}");
@@ -172,51 +154,35 @@ class Program
         var point3 = ConsoleValidator.ReadValidatedPoint("Введите координаты точки 3: ");
         Console.WriteLine($"{point3}");
 
-
-        // 4.7 создание студента
         Console.WriteLine("\n4.7");
 
         string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
         int[] grades = ReadGradesFromConsole();
         var student1 = new Student(studentName, grades);
 
-
         string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
         var student2 = new Student(studentName2);
 
         Console.WriteLine(student1);
         Console.WriteLine(student2);
-
     }
 
     static void Task5()
     {
-        // 5.6 Студент отличник
         Console.WriteLine("\n5.6");
 
         string studentName = ConsoleValidator.ReadValidatedString("Введите имя студента: ", 1, 50);
         int[] grades = ReadGradesFromConsole();
-        var student1 = new StudentWithStats(studentName, grades);
-
+        var student1 = new Student(studentName, grades);
 
         string studentName2 = ConsoleValidator.ReadValidatedString("Введите имя 2-го студента: ", 1, 50);
         int[] grades2 = ReadGradesFromConsole();
-        var student2 = new StudentWithStats(studentName2,grades2);
+        var student2 = new Student(studentName2, grades2);
 
-        Console.WriteLine($"{student1.Name}: Средний балл = {student1.AverageGrade:F2}, " + (student1.IsExcellent ? "отличник" : "не отличник") );
+        Console.WriteLine($"{student1.Name}: Средний балл = {student1.AverageGrade:F2}, " + (student1.IsExcellent ? "отличник" : "не отличник"));
         Console.WriteLine($"{student2.Name}: Средний балл = {student2.AverageGrade:F2}, " + (student2.IsExcellent ? "отличник" : "не отличник"));
-
-        //if (student1.IsExcellent && student2.IsExcellent)
-        //    Console.WriteLine("оба студента - отличники");
-        //else if (student1.IsExcellent)
-        //    Console.WriteLine($"{student1.Name} - отличник");
-        //else if (student2.IsExcellent)
-        //    Console.WriteLine($"{student2.Name} - отличник");
-        //else
-        //    Console.WriteLine("нет отличников");
     }
 
-    // метод для чтения оценок
     static int[] ReadGradesFromConsole()
     {
         while (true)

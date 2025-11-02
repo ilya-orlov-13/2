@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +7,25 @@ namespace ConsoleApp1
 {
     internal class Line
     {
-        public Point Start { get; set; }
-        public Point End { get; set; }
+        private Point start;
+        private Point end;
+
+        public Point Start
+        {
+            get { return start; }
+            set { start = value; }
+        }
+
+        public Point End
+        {
+            get { return end; }
+            set { end = value; }
+        }
 
         public Line(Point start, Point end)
         {
-            Start = start;
-            End = end;
+            this.start = start;
+            this.end = end;
         }
 
         public override string ToString()
